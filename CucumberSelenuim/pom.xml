@@ -13,46 +13,43 @@
 	</properties>
 
 	<dependencies>
-
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<!-- Test Frameworks -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+		
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit</artifactId>
 			<version>7.20.1</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+		
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>7.20.1</version>
+			<scope>test</scope>
 		</dependency>
 
-		<!--
-		https://mvnrepository.com/artifact/io.cucumber/cucumber-picocontainer -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-picocontainer</artifactId>
 			<version>7.20.1</version>
 		</dependency>
 
-		<!--
-		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+
+		<!-- Selenium -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>4.27.0</version>
 		</dependency>
 
+		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -60,15 +57,14 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!--
-		https://mvnrepository.com/artifact/net.masterthought/maven-cucumber-reporting -->
+		<!-- Cucumber Reporting -->
 		<dependency>
 			<groupId>net.masterthought</groupId>
 			<artifactId>maven-cucumber-reporting</artifactId>
 			<version>5.8.5</version>
 		</dependency>
-
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -92,7 +88,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
+					<testFailureIgnore>false</testFailureIgnore>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -107,10 +103,13 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
+							<jsonFiles>
+								${project.build.directory}/json-report/cucumber.json</jsonFiles>
 							<outputDirectory>
-								${project.build.directory}/masterthought-report</outputDirectory>
-							<cucumberOutput>
-								${project.build.directory}/json-report/cucumber.json</cucumberOutput>
+								${project.build.directory}/cucumber-reports</outputDirectory>
+							<projectName>CucumberSelenium</projectName>
+							<buildNumber>${project.version}</buildNumber>
+							<skip>false</skip>
 						</configuration>
 					</execution>
 				</executions>
